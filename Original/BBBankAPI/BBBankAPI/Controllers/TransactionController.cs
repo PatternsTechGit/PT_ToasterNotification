@@ -50,7 +50,7 @@ namespace BBBankAPI.Controllers
             var result = await _transactionService.DepositFunds(depositRequest);
             if (result == -1)
                 return new ApiResponse($"no Account exists with accountId {depositRequest.AccountId}", 204);
-            return new ApiResponse($"{depositRequest.Amount}$ Deposited");
+            return new ApiResponse($"{depositRequest.Amount}$ Deposited Successfully");
 
         }
     }

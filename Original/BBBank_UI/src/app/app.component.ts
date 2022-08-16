@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
   
   deposit() {
     const depositRequest: DepositRequest = {
-      accountId: this.account.accountNumber,
+      accountId: this.account.accountNumber+'',
       amount: this.amount
     };
     this.transactionService
@@ -62,8 +62,8 @@ export class AppComponent implements OnInit {
             this.initialize();
 
           } else {
-            this.initialize();
             this.notifyService.showSuccess(data.message);
+            this.amount=0;
           }
         },
         error: (err) => {
@@ -78,7 +78,6 @@ export class AppComponent implements OnInit {
 
   initialize() {
     this.message = '';
-    this.amount = 0;
     this.account = new AccountByX();
     this.account.userImageUrl = '../../../assets/images/No-Image.png'
   }
