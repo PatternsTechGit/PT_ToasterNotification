@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <app-toolbar></app-toolbar>
+</div>
+
+<div class="card-body">
+  <div class="table-full-width table-responsive">
+    <table width="100%" class="table table-striped table-hover">
+      <thead>
+        <tr>
+            
+          <th width="20%">Years</th>
+          <th width="20%">Balances</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of lineGraphData?.labels; let i = index">
+          <td>
+            {{ item }}
+          </td>
+          <td>
+            {{ lineGraphData.figures[i] }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
+

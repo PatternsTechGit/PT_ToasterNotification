@@ -1,0 +1,18 @@
+/* Used to style profile photo in navbar */
+.navbar .photo {
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    vertical-align: middle;
+    overflow: hidden;
+}
+
+.navbar .photo img {
+    width: 100%;
+}
+
+/* Class to align photo icon left in navbar */
+.ml-nav-custom {
+    margin-left: auto !important;
+}

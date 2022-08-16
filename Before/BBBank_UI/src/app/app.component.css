@@ -1,0 +1,15 @@
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    border-color: rgba(255,255,255,.1);
+    padding: 12px 7px;
+    vertical-align: middle;
+}
+  .table>tbody>tr>td, .table>thead>tr>th, .table>tfoot>tr>th {
+    color: rgba(255,255,255,.7)!important;
+}
+ .table>thead>tr>th {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 500;
+    border: 0;
+}
+
