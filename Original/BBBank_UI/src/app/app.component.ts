@@ -46,10 +46,13 @@ export class AppComponent implements OnInit {
       });
   }
 
-  
+  cancel(){
+    this.amount=0;
+  }
+    
   deposit() {
     const depositRequest: DepositRequest = {
-      accountId: this.account.accountNumber+'',
+      accountId: this.account.accountNumber,
       amount: this.amount
     };
     this.transactionService
@@ -70,11 +73,7 @@ export class AppComponent implements OnInit {
                     this.notifyService.showError(err.error);
         },
       });
-  }
-
-  clearMessage() {
-    this.message = '';
-  }
+  } 
 
   initialize() {
     this.message = '';
