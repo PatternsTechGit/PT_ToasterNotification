@@ -5,7 +5,7 @@ The HTTP 204 No Content status response code indicates that a request has succee
 
 ## What is Toaster Notification
 
-The Angular Toast is a small, non-blocking notification pop-up. A toast is shown to users with readable message content at the top of the screen or at a specific target and disappears automatically after a few seconds (time-out) with different animation effects. The control has various built-in options for customizing visual elements, animations, durations, and dismissing toasts.
+The [Angular Toastr](https://danielk.tech/home/how-to-add-toastr-notifications-to-your-angular-application) is a small, non-blocking notification pop-up. A toast is shown to users with readable message content at the top of the screen or at a specific target and disappears automatically after a few seconds (time-out) with different animation effects. The control has various built-in options for customizing visual elements, animations, durations, and dismissing toasts.
 
 
 
