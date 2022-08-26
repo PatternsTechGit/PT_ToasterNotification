@@ -1,0 +1,55 @@
+<div class="container-fluid">
+  <app-toolbar></app-toolbar>
+</div>
+
+<div class="row">
+  <div class="col-12 col-sm-6">
+      <div class="card card-user">
+          <div class="card-body">
+              <div class="author">
+                  <div class="block block-one"></div>
+                  <div class="block block-two"></div>
+                  <div class="block block-three"></div>
+                  <div class="block block-four"></div>
+
+                  <img alt="..." class=" avatar" src="{{account?.userImageUrl}}" />
+                  <h5 class="title">{{account?.accountTitle}}</h5>
+                  <p class="account-number">{{account?.accountNumber}}</p>
+                  <p class="balance">Balance: <b>$ {{account.currentBalance}}</b> <span
+                          *ngIf="account?.accountStatus === 'Active'"
+                          class="account-status active">Active</span><span
+                          *ngIf="account?.accountStatus === 'InActive'"
+                          class="account-status inactive">Inactive</span></p>
+                  <div class="amount-cont">
+                      <div class="error-message">
+                          <p class="text-warning">
+                               {{message}}
+                          </p>
+                      </div>
+                      <div class="form-row">
+                          <div class="col-sm-2"></div>
+                          <div class="col-sm-8 my-1">
+                              <div class="input-group mb-2">
+                                  <div class="input-group-prepend" style="margin-left: 50%">
+                                      <div class="input-group-text">$</div>
+                                  </div>
+                                  <input type="number" [(ngModel)]="amount" class="form-control align-self-center" id="depositAmount" placeholder="Deposit Amount">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6 mb-3">
+      <button class="btn btn-light btn-block" (click)="cancel()" style="width: 30%;margin-left: 20%;">Cancel</button>
+  </div>
+  <div class="col-sm-6 mb-3">
+      <button class="btn btn-danger btn-block" (click)="deposit()" style="width: 30%;margin-left: -50%;">Deposit</button>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

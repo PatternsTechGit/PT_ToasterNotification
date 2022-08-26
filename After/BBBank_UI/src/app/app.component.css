@@ -1,0 +1,191 @@
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #ffffff;
+  background-clip: border-box;
+  border: 0.0625rem solid rgba(34, 42, 66, 0.05);
+  border-radius: 0.2857rem;
+}
+.card {
+  background: #27293d;
+  border: 0;
+  position: relative;
+  width: 100%;
+  margin-bottom: 30px;
+  box-shadow: 0 1px 20px 0px rgba(0, 0, 0, 0.1);
+}
+.card .card-body {
+  padding: 15px;
+}
+.card .card-body .card-description {
+  color: rgba(255, 255, 255, 0.6);
+}
+.card .avatar {
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+.card-user {
+  overflow: hidden;
+}
+.card-user .author {
+  text-align: center;
+  text-transform: none;
+  margin-top: 25px;
+}
+.card-user .author a+p.description {
+  margin-top: -7px;
+}
+.card-user .author .block {
+  position: absolute;
+  height: 100px;
+  width: 250px;
+}
+.card-user .author .block.block-one {
+  background: rgba(225, 78, 202, 0.6);
+  background: -webkit-linear-gradient(to right, rgba(225, 78, 202, 0.6) 0%, rgba(225, 78, 202, 0) 100%);
+  background: -o-linear-gradient(to right, rgba(225, 78, 202, 0.6) 0%, rgba(225, 78, 202, 0) 100%);
+  background: -moz-linear-gradient(to right, rgba(225, 78, 202, 0.6) 0%, rgba(225, 78, 202, 0) 100%);
+  background: linear-gradient(to right, rgba(225, 78, 202, 0.6) 0%, rgba(225, 78, 202, 0) 100%);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=10);
+  -webkit-transform: rotate(150deg);
+  -moz-transform: rotate(150deg);
+  -ms-transform: rotate(150deg);
+  -o-transform: rotate(150deg);
+  transform: rotate(150deg);
+  margin-top: -90px;
+  margin-left: -50px;
+}
+.card-user .author .block.block-two {
+  background: rgba(225, 78, 202, 0.6);
+  background: -webkit-linear-gradient(to right, rgba(225, 78, 202, 0.6) 0%, rgba(225, 78, 202, 0) 100%);
+  background: -o-linear-gradient(to right, rgba(225, 78, 202, 0.6) 0%, rgba(225, 78, 202, 0) 100%);
+  background: -moz-linear-gradient(to right, rgba(225, 78, 202, 0.6) 0%, rgba(225, 78, 202, 0) 100%);
+  background: linear-gradient(to right, rgba(225, 78, 202, 0.6) 0%, rgba(225, 78, 202, 0) 100%);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=10);
+  -webkit-transform: rotate(30deg);
+  -moz-transform: rotate(30deg);
+  -ms-transform: rotate(30deg);
+  -o-transform: rotate(30deg);
+  transform: rotate(30deg);
+  margin-top: -40px;
+  margin-left: -100px;
+}
+.card-user .author .block.block-three {
+  background: rgba(225, 78, 202, 0.6);
+  background: -webkit-linear-gradient(to right, rgba(225, 78, 202, 0.6) 0%, rgba(225, 78, 202, 0) 100%);
+  background: -o-linear-gradient(to right, rgba(225, 78, 202, 0.6) 0%, rgba(225, 78, 202, 0) 100%);
+  background: -moz-linear-gradient(to right, rgba(225, 78, 202, 0.6) 0%, rgba(225, 78, 202, 0) 100%);
+  background: linear-gradient(to right, rgba(225, 78, 202, 0.6) 0%, rgba(225, 78, 202, 0) 100%);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=10);
+  -webkit-transform: rotate(170deg);
+  -moz-transform: rotate(170deg);
+  -ms-transform: rotate(170deg);
+  -o-transform: rotate(170deg);
+  transform: rotate(170deg);
+  margin-top: -70px;
+  right: -45px;
+}
+.card-user .author .block.block-four {
+  background: rgba(225, 78, 202, 0.6);
+  background: -webkit-linear-gradient(to right, rgba(225, 78, 202, 0.6) 0%, rgba(225, 78, 202, 0) 100%);
+  background: -o-linear-gradient(to right, rgba(225, 78, 202, 0.6) 0%, rgba(225, 78, 202, 0) 100%);
+  background: -moz-linear-gradient(to right, rgba(225, 78, 202, 0.6) 0%, rgba(225, 78, 202, 0) 100%);
+  background: linear-gradient(to right, rgba(225, 78, 202, 0.6) 0%, rgba(225, 78, 202, 0) 100%);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=10);
+  -webkit-transform: rotate(150deg);
+  -moz-transform: rotate(150deg);
+  -ms-transform: rotate(150deg);
+  -o-transform: rotate(150deg);
+  transform: rotate(150deg);
+  margin-top: -25px;
+  right: -45px;
+}
+.card-user .avatar {
+  width: 124px;
+  height: 124px;
+  border: 5px solid #2b3553;
+  border-bottom-color: transparent;
+  background-color: transparent;
+  position: relative;
+}
+.card-user .card-body {
+  min-height: 240px;
+}
+.card-user hr {
+  margin: 5px 15px;
+}
+.card-user .card-description {
+  margin-top: 30px;
+}
+.title {
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  font-size: .875rem;
+  text-transform: uppercase;
+}
+.account-number {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+.card .balance {
+  margin: 25px 0;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  position: relative;
+}
+.card .balance b {
+  font-weight: 600;
+}
+.card .balance span.account-status {
+  background: #2da3e0;
+  margin-left: 10px;
+  margin-top: -1px;
+  padding: 2px 6px;
+  color: #27293d;
+  font-size: .75rem;
+  border-radius: .25rem;
+  text-transform: uppercase;
+  /* position: absolute; */
+}
+.card .balance span.account-status.active {
+  background: #2da3e0;
+}
+.card .balance span.account-status.inactive {
+  background: #e3879e;
+}
+.card .amount-cont {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: .875rem;
+  font-weight: 300;
+}
+.form-control {
+  background-color: #27293d;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #fff;
+  border: 1px solid #e14eca;
+}
+.input-group-text {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #fff;
+  background-color: #27293d;
+  border: 1px solid #e14eca;
+}
+.error-message {
+  text-align: center;
+}
+.text-warning {
+  color: #ff8d72 !important;
+  font-size: .875rem;
+  font-weight: 300;
+  margin-bottom: 1px;
+}

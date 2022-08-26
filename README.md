@@ -1,86 +1,67 @@
-# Toaster Notification with Handling No Content
-
-## What is HTTP 204 - No Content
-The HTTP 204 No Content status response code indicates that a request has succeeded, but the server side respond with **no body** or returned **null** result.
+# Toast Notification with Handling No Content
 
 ## What is Toaster Notification
 
-The [Angular Toastr](https://danielk.tech/home/how-to-add-toastr-notifications-to-your-angular-application) is a small, non-blocking notification pop-up. A toast is shown to users with readable message content at the top of the screen or at a specific target and disappears automatically after a few seconds (time-out) with different animation effects. The control has various built-in options for customizing visual elements, animations, durations, and dismissing toasts.
+The [Angular Toastr](https://danielk.tech/home/how-to-add-toastr-notifications-to-your-angular-application) is **a small, non-blocking notification pop-up**. A toast is shown to users with readable message content at the top of the screen or at a specific target and disappears automatically after a few seconds (time-out) with different animation effects. The control has **various built-in options for customizing** visual elements, animations, durations, and dismissing toasts.
 
-
+## What is HTTP 204 - No Content
+The HTTP 204 No Content status response code indicates that **a request has succeeded**, but the server side respond with **no body** or returned **null** result.
 
 # About this exercise
 
 ## Backend Code Base:
 
-Previously we have developed an **API** solution in asp.net core in which we have
+Previously we have developed an **API solution in ASP.NET Core** in which we have
 
-* EF Code first approach to generate database of a fictitious bank application called **BBBank**.
+* **EF Code first approach** to generate database of a fictitious bank application called **BBBank**.
 * We have implemented **AutoWrapper** in BBankAPI project. 
 
 For more details see [data seeding](https://github.com/PatternsTechGit/PT_AzureSql_EFDataSeeding) lab.
 
 ## Frontend Codebase
-Previously we have angular application in which we have
+Previously we have an Angular application in which we have
 
-* FontAwesome library for icons.
-* Bootstrap library for styling.
-* Created client side models to receive data.
-* Created transaction service to call the API.
-* Fixed the CORS error on the server side.
-* Populated html table, using data returned by API.
-* Handled AutoWrapper results.
+* **FontAwesome library** for icons.
+* **Bootstrap library** for styling.
+* **Client side models** to receive data.
+* **Transaction service** to call the API.
+* **CORS implementation** on the server side.
+* **Populated html table** using response by the API.
+* **AutoWrapper** handling.
 
 For more details see [Angular calling API](https://github.com/PatternsTechGit/PT_AngularCallingAPI) lab.
 
 
 ## **In this exercise**
 
-In this exercise again we will be working on both **frontend** & **backend** codebase.
+We will be working on both **frontend** & **backend** code-bases.
 
 **Backend Codebase**
 
 #### On server side we will:
 * Create an **account controller** with method `GetAccountByAccountNumber`.
-* Create an **account service** and a contract for this service in the **Service** project.
-* Create HttpPost `Deposit` method in **transaction controller**.
-* Implement deposit fund by account number, If account number does not matches then will return **no content**.
+* Create an **account service** and a contract in the Service project.
+* Create HttpPost **Deposit method** in transaction controller.
+* Add a **new method DepositFund** in the transaction service and its contract.
 
 
 **Frontend Codebase**
 #### On frontend side we will:
-* Create a new form with Image & input field.
+* **Create a new form** with Image and input field.
 * Load the account information on load.
-* Create client side **models** to map data for API.
-* Create the **account service** to call the **GetAccountByAccountNumber** method of API.
-* Implement **Deposit** method in **transaction service** to call the API.
-* Implement Angular Toaster Notifications.
+* Create required **models**.
+* Create the **account service**.
+* Implement **Deposit** method in **transaction service**.
+* **Implement Angular Toaster Notifications**.
 
 
 # Server Side Implementation
 
 Follow the below steps to implement server side code changes:
 
-## Step 1: Create AccountByUserResponse class
+## Step 1: Creating Interface for Account Service
 
-We will create a new class named **AccountByUserResponse** in **Entities** project under **Responses** folder which will contain the account related information and user Image url as below :
-
-```cs
-public class AccountByUserResponse
-    {
-        public string AccountId { get; set; }
-        public string AccountNumber { get; set; }
-        public string AccountTitle { get; set; }
-        public decimal CurrentBalance { get; set; }
-        [JsonConverter(typeof(JsonStringEnumConverter))]
-        public AccountStatus AccountStatus { get; set; }
-        public string UserImageUrl { get; set; }
-    }
-```
-
-## Step 2: Creating Interface for Account Service
-
-In **Services** project create an interface (contract) in **Contracts** folder to implement the separation of concerns.
+**Create an interface** (contract) in Contracts folder of the Services project to implement the separation of concerns.
 It will make our code testable and injectable as a dependency.
 
 ```csharp
@@ -90,11 +71,11 @@ public interface IAccountsService
 }
 ```
 
-## Step 3: Implementing Account Service 
+## Step 2: Implementing Account Service 
 
-In **Services** project we will be implementing account service. Create new file **AccountService.cs** In this file we will be implementing **IAccountsService** interface.
+**Create new service AccountService** in Services project where we will  implement IAccountsService interface.  
 
- In `GetAccountByAccountNumber` method we are checking if account exists by accountNumber or does not exists. If the account exist then return the AccountByUserResponse object otherwise return null as below   
+ In **GetAccountByAccountNumber method we are checking weather the account exists or not**. If the account exist then return the response object otherwise return null as below   
 
 ```csharp
  public class AccountService : IAccountsService
@@ -125,17 +106,17 @@ In **Services** project we will be implementing account service. Create new file
     }
 ```
 
-## Step 4: Dependency Injecting BBBankContext & AccountService 
+## Step 3: Configure Account Service 
 
-In `Program.cs` file we will inject the **IAccountsService** to services container, so that we can use the relevant object in services.
+In `Program.cs` file we will inject the **IAccountsService** to services container, so that we can use the relevant service.
 
 ```csharp
 builder.Services.AddScoped<IAccountsService, AccountService>();
 ```
 
-## Step 5: SettingUp Accounts Controller 
+## Step 4: Accounts Controller 
 
-Create a new API controller named `AccountsController` and inject the `IAccountsService` using the constructor.
+**Create a new accounts controller** and inject the account service using the constructor injection.
 
 ```csharp
 private readonly IAccountsService _accountsService;
@@ -145,7 +126,7 @@ public AccountsController(IAccountsService accountsService)
 }
 ```
 
-Now we will create an API method **GetAccountByAccountNumber** in `AccountsController` to call the service to check either account exists or not.
+**Create a new method GetAccountByAccountNumber** in accounts controller where we will call the service method.
 
 ```csharp
 [Route("api/[controller]")]
@@ -169,26 +150,37 @@ Now we will create an API method **GetAccountByAccountNumber** in `AccountsContr
         }
     }
 ```
-If the account exists then we will return **ApiResponse** with result.
+We will return the response as **ApiResponse** with result if the account exists and iF the account does not exists or null then we will return **ApiResponse** with message and **204 status code** for no-content. 
 
-IF the account does not exists or null then we will return **ApiResponse** with message and **204 status code**. 
+## Step 5: Create Required Models
+Create a new model in the Requests folder of the Entities project
+
+```cs
+ public class DepositRequest
+    {
+        public string AccountId { get; set; }
+        public decimal Amount { get; set; }
+    }
+```
 
 ## Step 6: Creating DepositFunds method 
 
-Go to **ITransactionService** In Services project and create an a new method named `DepositFunds`.
+Go to **ITransactionService** in Services project and create an a new method named **DepositFunds**.
 
 ```csharp
- public interface ITransactionService
+     public interface ITransactionService
     {
+        Task<LineGraphData> GetLast12MonthBalances(string? userId);
         Task<int> DepositFunds(DepositRequest depositRequest);
+
     }
 ```
 
 ## Step 7: Implementing Transaction Service 
 
-In **Services** project we will be implementing account service. Open the **TransactionService** file and implement the DepositFunds method.
+We will **implement the DepositFunds method** in the transaction service.
 
- In `DepositFunds` method we are checking if account exists by accountNumber or does not exists. If the account exist then we will be adding a transaction for relevant account otherwise return -1.   
+ In **DepositFunds method we are checking if account exists by accountNumber or not**. If the account exist then we will be adding a transaction for relevant account otherwise return -1.   
 
 ```csharp
  public async Task<int> DepositFunds(DepositRequest depositRequest)
@@ -212,10 +204,9 @@ In **Services** project we will be implementing account service. Open the **Tran
         }
 ```
 
-## Step 8: SettingUp Transaction Controller 
+## Step 8: Transaction Controller 
 
-
-Now we will create an API method **Deposit** in `TransactionController` to call the service to deposit the funds.
+**Create a new method Deposit** in transaction controller to call the service to deposit the funds.
 
 ```csharp
  [HttpPost]
@@ -239,20 +230,20 @@ Follow the below steps to implement frontend code changes:
 
 ### **Install ngx-toastr library**
 
-To install the ngx-toastr library run the npm command as below :
+To install the toast library run the npm command as below :
 
 ```
 npm i ngx-toastr@13.0.0 
 ```
-As our project is using  angular common v.13 so we will install the dependent toastr library version (13.0.0) otherwise for latest angular we can use command as below :
+As our project is using  angular common v.13 so we will install the dependent toast library version (13.0.0) otherwise for latest angular we can use command as below :
 
 ```
  npm i --save ngx-toastr
 ```
 
-### **SettingUp toastr Style** 
+### **Toastr Style** 
 
-After installing the library we will add toastr **css** style reference in `angular.json` file as below :
+Add the toastr style reference in `angular.json` file as below :
 
 ```json
 "styles": [
@@ -264,8 +255,8 @@ After installing the library we will add toastr **css** style reference in `angu
 ```
 
 ### **Import Toastr Module**
-Go to `app.module.ts` file and add **FormsModule,BrowserAnimationsModule,
-    ToastrModule.forRoot()** reference in imports as below : 
+Go to `app.module.ts` file and add **FormsModule**, **BrowserAnimationsModule**,
+    **ToastrModule** reference in imports array as below : 
 
 ```ts
 import { FormsModule } from '@angular/forms';
@@ -282,18 +273,25 @@ imports: [
   ]
 ```
 
+Also add accounts service in the providers array as below
+
+```cs
+  providers: [TransactionService, AccountsService],
+
+```
+
 ## Step 2: Implement Notification Service
-Create a new file `notification.service.ts` in **app** folder which will contains the common functions for showing the notification.
+Create a new file `notification.service.ts` in **app** directory which will contains the common functions for showing the notification.
 
 The common functions are :
 
-* showSuccess -Will show the success notification message in **Green** Color. 
-* showError - Will show the error notification message in **Red** Color.
-* showInfo  -Will show the information notification message in **Blue** Color.
-* showWarning -Will show the success notification in message **Orange** Color.
+* **showSuccess** -Will show the success notification message in **Green** Color. 
+* **showError** - Will show the error notification message in **Red** Color.
+* **showInfo** -Will show the information notification message in **Blue** Color.
+* **showWarning** -Will show the success notification in message **Orange** Color.
 
 
-We will Inject the ToastrService and use its methods accordingly as below :
+We will **Inject the ToastrService** and use its methods accordingly as below :
 
 
 ```ts
@@ -328,7 +326,7 @@ export class NotificationService {
 
 ## Step 3: Create/Update model classes
 
-Go to `api-Response.ts` in **models** folder and add a new property **statusCode** which will contain the status code received from server side as below:
+Go to `api-Response.ts` in models folder and add a new property **statusCode** which will contain the status code received from server side as below:
 
 ```ts
 export interface ApiResponse {
@@ -338,7 +336,7 @@ export interface ApiResponse {
     responseException: ResponseException;
 }
 ```
-Create a new file `account-by-x.ts`  in **models** folder and which will contain account related properties as below:
+**Create a new file** `account-by-x.ts`  in models folder and which will contain account related properties as below:
 ```ts
 import { ApiResponse } from "./api-Response";
 
@@ -356,7 +354,7 @@ import { ApiResponse } from "./api-Response";
   }
 ```
 
-Create a new file `deposit-request.ts`  in **models** folder and which will contain deposit funds related properties as below:
+**Create a new file** `deposit-request.ts`  in models folder and which will contain deposit funds related properties as below:
 ```ts
 import { ApiResponse } from "./api-Response";
 
@@ -371,9 +369,12 @@ export interface DepositResponse extends ApiResponse {
 ```
 
 ## Step 4: Setup Account Service
-Create a new file `accounts.service.ts` in **services** folder which will contain the `getAccountByAccountNumber` method which will call the API method to get account information by accountNumber as below :
+**Create a new file** `accounts.service.ts` in services folder which will contain the **getAccountByAccountNumber** method which will call the API method to get account information by accountNumber as below :
 
 ```ts
+@Injectable({
+    providedIn: 'root',
+  })
 export default class AccountsService {
   constructor(private httpClient: HttpClient) { }
 
@@ -384,7 +385,7 @@ export default class AccountsService {
 ```
 
 ## Step 5:  Setup Transaction Service 
-Go to `transaction.service.ts` in **services** folder and create a new method named `deposit` which will call the API method to deposit funds by accountNumber as below :
+Go to transaction service in services folder and **create a new method deposit** which will call the API method to deposit funds by accountNumber as below :
 
 ```ts
 deposit(depositRequest: DepositRequest): Observable<DepositResponse> {
@@ -398,10 +399,10 @@ deposit(depositRequest: DepositRequest): Observable<DepositResponse> {
 ```
 
 
-## Step 6: SettingUp UI 
-Go to `app.component.html` and add Image control that is bind to the users profile picture, add labels and input field for deposit amount value. All these filed are bind as two way binding to `AccountByX` model.
+## Step 6: SettingUp Template 
+Go to `app.component.html` and add Image control that is bind to the users profile picture, add labels and input field for deposit amount value. All these **fields are bind as two way binding to AccountByX model**.
 
-Furthermore we will create 2 buttons `Deposit` and `Cancel`. On deposit button click we will call the transactionService to deposit the funds and on cancel button click we will clear the amount.
+Furthermore we will **create two buttons Deposit and Cancel**. On deposit button click we will call the transactionService to deposit the funds and on cancel button click we will clear the amount.
 
 ```html
 <div class="container-fluid">
@@ -464,16 +465,15 @@ Furthermore we will create 2 buttons `Deposit` and `Cancel`. On deposit button c
 
 ## Step 7: Getting Existing Account & Deposit Funds
 
-Go to `app.component.ts` and create `getToAccount` function which will be called on **ngOnInit** life cycle. This method will call the 
- `getAccountByAccountNumber` method of `AccountsService`.
+Go to `app.component.ts` and **create getToAccount function** which will be called on **ngOnInit** life cycle. This method will call the **getAccountByAccountNumber** method of AccountsService.
  Once the response is received from API then it will check the **statusCode**. If the statusCode is **204** then we will get the error/warning message from **data.result** object. Otherwise we will set the 
 toAccount object with received result.
 
-We will create `initializeTo` to empty the form, so that we can reset the form on **ngOnInit** and after **204 error** received.
+We will create **initializeTo** to empty the form, so that we can reset the form on **ngOnInit** and after **204 error** received.
 
-We will create `deposit` method which will cal the **deposit** method of `TransactionService` to deposit the funds.
+We will create **deposit** method which will cal the **deposit** method of **TransactionService** to deposit the funds.
 
-We will inject the `NotificationService` for **Toastr Notification** and call the notification service methods on response received from deposit method.
+We will inject the **NotificationService** for **Toastr Notification** and call the notification service methods on response received from deposit method.
 
 Here is the code as below :
 
@@ -553,7 +553,7 @@ export class AppComponent implements OnInit {
 ```
 
 ## Step 8: SettingUp Styling
-Go to `app.component.css` and add the following **css** for styling. 
+Go to `app.component.css` and add the following code for styling. 
 
 ```css
 
